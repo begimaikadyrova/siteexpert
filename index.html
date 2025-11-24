@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ОсОО "Экспертъ" - Автоэкспертиза и оценка ущерба</title>
+    <meta name="description" content="Независимая автоэкспертиза, оценка ущерба после ДТП, трасология в Бишкеке. ОсОО Экспертъ.">
+    <!-- Подключение иконок FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- ОСНОВНЫЕ СТИЛИ (CSS) --- */
+        :root {
+            --primary-color: #2c3e50; /* Темно-синий */
+            --accent-color: #c0392b;  /* Красный акцент */
+            --light-bg: #f8f9fa;
+            --text-color: #333;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--light-bg);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- ШАПКА --- */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 2px solid white;
+            padding: 5px 12px;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 5px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            padding: 8px 15px;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover, .nav-links a.active-link {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Гамбургер меню для мобильных */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- СЕКЦИИ (СТРАНИЦЫ) --- */
+        /* Скрываем все секции по умолчанию */
+        section {
+            display: none;
+            padding: 60px 0;
+            background-color: var(--white);
+            flex: 1; /* Чтобы толкать футер вниз */
+            animation: fadeIn 0.4s ease-in-out;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        /* Класс для отображения активной секции */
+        section.active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 15px auto 0;
+        }
+
+        /* --- О НАС --- */
+        .about-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .about-hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=1000');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 40px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .about-hero h1 {
+            margin: 0 0 20px 0;
+            font-size: 2.5rem;
+        }
+        .about-content {
+            text-align: justify;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .about-content p {
+            font-size: 1.15rem;
+            margin-bottom: 20px;
+        }
+
+        /* Стили для сертификатов */
+        .certificates-section {
+            margin-top: 50px;
+            text-align: center;
+        }
+        .certificates-section h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+        .certificates-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .certificate-item {
+            width: 200px;
+            height: 280px; /* Вертикальный формат А4 */
+            border: 5px solid #eee;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            background-color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .certificate-item:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-color);
+            z-index: 10;
+        }
+        .certificate-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        .cert-caption {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+        }
+
+
+        /* --- УСЛУГИ --- */
+        .service-item {
+            display: flex;
+            background: white;
+            margin-bottom: 40px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .service-img {
+            flex: 0 0 35%;
+            min-height: 250px;
+            background-color: #ddd;
+            position: relative;
+        }
+
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+        }
+
+        .service-desc {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .service-desc h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.4rem;
+        }
+
+        /* --- ТАРИФЫ --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 0 0 1px #eee;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 18px 25px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .price-cell {
+            font-weight: bold;
+            color: var(--accent-color);
+            width: 200px;
+            white-space: nowrap;
+        }
+
+        /* --- ИНФОРМАЦИЯ (FAQ) --- */
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            background: white;
+        }
+
+        .faq-item summary {
+            padding: 20px;
+            background-color: #fff;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-item summary:hover {
+            background-color: #fcfcfc;
+        }
+        
+        .faq-item summary::after {
+            content: '\f078';
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            transition: transform 0.3s;
+        }
+        
+        .faq-item[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .faq-item p {
+            padding: 20px;
+            margin: 0;
+            background-color: var(--light-bg);
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.95rem;
+        }
+
+        /* --- КОНТАКТЫ --- */
+        .contacts-layout {
+            display: grid;
+            /* Текст занимает 350px, остальное - карта */
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .contact-info {
+            width: 100%;
+        }
+
+        .contact-info ul {
+            list-style: none;
+            padding: 0;
+            display: block;
+        }
+
+        /* Стиль для текста внизу контактов */
+        .contact-intro {
+            margin-top: 40px; /* Увеличил отступ сверху, так как теперь текст под блоками */
+            margin-bottom: 0;
+            color: #555;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            font-style: normal; /* Убрал курсив для более делового вида */
+            text-align:justify; /* Центрирование */
+            max-width: 1050px;   /* Ограничение ширины для читаемости */
+            margin-left: auto;  /* Центрирование блока */
+            margin-right: auto;
+        }
+
+        .contact-info li {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-info i {
+            width: 40px;
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-top: 4px;
+        }
+
+        .contact-info a {
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 1px dotted transparent;
+            transition: 0.3s;
+        }
+
+        /* ОБНОВЛЕНО: Единый стиль для заголовков в контактах */
+        .contact-info h3, .map-wrapper h3 {
+             margin-top: 0; 
+             color: var(--text-color);
+             font-size: 1.17rem; /* Вернул стандартный размер заголовка H3 (был 1.4rem) */
+             margin-bottom: 20px;
+             text-align: left;
+             font-weight: bold; /* Явно указываем жирность для надежности */
+        }
+
+        /* Старый стиль для .map-wrapper h3 удален и заменен правилом выше */
+
+        .map-container {
+            width: 100%;
+            height: 500px;
+            background-color: #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            position: relative;
+        }
+        
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: #e6e6e6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        /* --- ФУТЕР --- */
+        footer {
+            background-color: #1a252f;
+            color: #95a5a6;
+            padding: 50px 0 20px;
+            font-size: 0.9rem;
+            margin-top: auto; /* Прижимает футер к низу */
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-column h4 {
+            color: white;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #95a5a6;
+            text-decoration: none;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            font-size: 0.85rem;
+        }
+
+        /* --- АДАПТИВНОСТЬ --- */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--primary-color);
+                position: absolute;
+                top: 60px;
+                left: 0;
+                padding: 20px;
+                gap: 15px;
+                text-align: center;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .service-item {
+                flex-direction: column;
+            }
+            
+            .service-img {
+                height: 200px;
+                flex: none;
+            }
+
+            /* На мобильных перестраиваем контакты в одну колонку */
+            .contacts-layout {
+                grid-template-columns: 1fr; /* Возвращаем одну колонку для телефонов */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo" onclick="window.location.hash='about'">ОсОО "Экспертъ"</div>
+                <button class="mobile-menu-btn" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="nav-links" id="navLinks">
+                    <!-- Ссылки теперь работают как переключатели страниц -->
+                    <a href="#about" class="nav-link" data-page="about">О нас</a>
+                    <a href="#services" class="nav-link" data-page="services">Услуги</a>
+                    <a href="#tariffs" class="nav-link" data-page="tariffs">Тарифы</a>
+                    <a href="#info" class="nav-link" data-page="info">Информация</a>
+                    <a href="#contacts" class="nav-link" data-page="contacts">Контакты</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- СТРАНИЦА: О НАС (Главная) -->
+    <section id="about" class="active-page">
+        <div class="container">
+            <div class="about-wrapper">
+                <div class="about-hero">
+                    <h1>Профессиональная автоэкспертиза</h1>
+                    <p>Точность. Независимость. Законность.</p>
+                </div>
+                <h2>О компании</h2>
+                <div class="about-content">
+                    <p>
+                        <strong>ОсОО "Экспертъ"</strong> — лидер рынка независимой экспертизы в Бишкеке. Мы предоставляем услуги по определению реального ущерба после ДТП и рыночной стоимости автомобилей. Наш приоритет — объективность и техническая грамотность.
+                    </p>
+                    <p>
+                        Мы понимаем специфику местного рынка, поэтому при расчетах стоимости ремонта опираемся на <strong>реальные рыночные цены</strong> запчастей и услуг СТО в нашем регионе, а не на усредненные базы данных зарубежных программ. Это позволяет получить честную калькуляцию, которой хватит на фактическое восстановление автомобиля.
+                    </p>
+                    <p>
+                        Наш офис находится в удобной локации, и мы всегда готовы проконсультировать вас по техническим вопросам. Вы получаете на руки официальное экспертное заключение, которое соответствует всем стандартам и служит надежным основанием для отстаивания ваших интересов.
+                    </p>
+                </div>
+
+                <!-- БЛОК СЕРТИФИКАТОВ -->
+                <div class="certificates-section">
+                    <h3>Лицензии и Сертификаты</h3>
+                    <div class="certificates-grid">
+                        <!-- Сертификат 1 -->
+                        <div>
+                            <div class="certificate-item">
+                                <!-- Замените src на путь к вашему сертификату -->
+                                <img src="https://via.placeholder.com/200x280?text=Лицензия+КР" alt="Лицензия">
+                            </div>
+                            <div class="cert-caption">Лицензия МинЮст</div>
+                        </div>
+                        
+                        <!-- Сертификат 2 -->
+                        <div>
+                            <div class="certificate-item">
+                                <img src="https://via.placeholder.com/200x280?text=Сертификат+Оценщика" alt="Сертификат 1">
+                            </div>
+                            <div class="cert-caption">Сертификат оценщика</div>
+                        </div>
+
+                        <!-- Сертификат 3 -->
+                        <div>
+                            <div class="certificate-item">
+                                <img src="https://via.placeholder.com/200x280?text=Диплом+Эксперта" alt="Диплом">
+                            </div>
+                            <div class="cert-caption">Диплом эксперта-техника</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- СТРАНИЦА: УСЛУГИ -->
+    <section id="services">
+        <div class="container">
+            <h2>Наши Услуги</h2>
+            
+            <div class="service-item">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1562920616-0b5c165a2503?auto=format&fit=crop&q=80&w=800" alt="Оценка ущерба ДТП">
+                </div>
+                <div class="service-desc">
+                    <h3>Независимая оценка ущерба при ДТП</h3>
+                    <p>Полный цикл оценки повреждений после аварии. Включает осмотр, фотофиксацию, составление акта осмотра и расчет стоимости ремонта с учетом износа и без него.</p>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1550529813-c35a9686036e?auto=format&fit=crop&q=80&w=800" alt="Трасология">
+                </div>
+                <div class="service-desc">
+                    <h3>Трасологическая экспертиза</h3>
+                    <p>Экспертиза следов на месте происшествия. Позволяет определить, кто из водителей нарушил правила, с какой скоростью двигались авто и каков был механизм столкновения.</p>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=800" alt="Рыночная оценка">
+                </div>
+                <div class="service-desc">
+                    <h3>Оценка рыночной стоимости</h3>
+                    <p>Официальный документ о стоимости автомобиля. Требуется для нотариусов (наследство), банков (залог), судов (раздел имущества) или для продажи юр. лицами.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- СТРАНИЦА: ТАРИФЫ -->
+    <section id="tariffs">
+        <div class="container">
+            <h2>Стоимость услуг</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Наименование услуги</th>
+                        <th>Стоимость</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Экспресс-оценка ущерба (без скрытых дефектов)</td>
+                        <td class="price-cell">от 1 500 сом</td>
+                    </tr>
+                    <tr>
+                        <td>Полная оценка ущерба с отчетом</td>
+                        <td class="price-cell">от 3 000 сом</td>
+                    </tr>
+                    <tr>
+                        <td>Оценка рыночной стоимости автомобиля</td>
+                        <td class="price-cell">2 500 сом</td>
+                    </tr>
+                    <tr>
+                        <td>Трасологическая экспертиза</td>
+                        <td class="price-cell">от 5 000 сом</td>
+                    </tr>
+                    <tr>
+                        <td>Пересчет калькуляции страховой компании</td>
+                        <td class="price-cell">2 000 сом</td>
+                    </tr>
+                    <tr>
+                        <td>Выезд эксперта по городу</td>
+                        <td class="price-cell">1 000 сом</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">
+                * Окончательная стоимость зависит от количества поврежденных деталей и сложности работы.
+            </p>
+        </div>
+    </section>
+
+    <!-- СТРАНИЦА: ИНФОРМАЦИЯ -->
+    <section id="info">
+        <div class="container">
+            <h2>Часто задаваемые вопросы</h2>
+
+            <details class="faq-item">
+                <summary>Что делать сразу после ДТП?</summary>
+                <p>1. Включите аварийку и выставьте знак. 2. Вызовите ГУОБДД (102). 3. Не перемещайте предметы, относящиеся к аварии. 4. Сделайте детальные фото повреждений и расположения машин на дороге до приезда ГАИ.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Зачем нужна независимая экспертиза, если есть страховая?</summary>
+                <p>Страховые компании часто занижают выплаты, используя минимальные цены на запчасти. Наша экспертиза показывает реальную рыночную стоимость ремонта, что позволяет вам взыскать разницу через суд.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Нужно ли звать виновника на осмотр?</summary>
+                <p>Да, обязательно. Вы должны отправить телеграмму с уведомлением о вручении виновнику (и страховой) за 3 рабочих дня до осмотра. Это сделает наше заключение легитимным доказательством.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Как быстро будет готов отчет?</summary>
+                <p>Осмотр занимает до часа. Подготовка документов, расчетов и фототаблиц обычно занимает 1-2 рабочих дня.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Какой срок действия у оценки?</summary>
+                <p>Оценка рыночной стоимости актуальна 6 месяцев. Оценка ущерба от ДТП привязана к дате аварии и не имеет срока давности (в пределах 3 лет исковой давности).</p>
+            </details>
+        </div>
+    </section>
+
+    <!-- СТРАНИЦА: КОНТАКТЫ -->
+    <section id="contacts">
+        <div class="container">
+            <h2>Наши контакты</h2>
+            <div class="contacts-layout">
+                <!-- Левая колонка: Инфо -->
+                <div class="contact-info">
+                    <h3>Свяжитесь с нами</h3>
+                    
+                    <ul>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Адрес:</strong><br>
+                                г. Бишкек, ул. Горького 20, <br>2 этаж, 8 кабинет
+                            </div>
+                        </li>
+                        <li>
+                            <i class="far fa-clock"></i>
+                            <div>
+                                <strong>Режим работы:</strong><br>
+                                ПН-СБ: 09:00 - 17:00<br>
+                                <span style="color: var(--accent-color);">ВС: Выходной</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-volume"></i>
+                            <div>
+                                <strong>Телефон:</strong><br>
+                                <a href="tel:+996555000000">+996 (555) 00-00-00</a>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fab fa-whatsapp"></i>
+                            <div>
+                                <strong>WhatsApp:</strong><br>
+                                <a href="https://wa.me/996555000000" target="_blank">Написать в WhatsApp</a>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="far fa-envelope"></i>
+                            <div>
+                                <strong>Email:</strong><br>
+                                <a href="mailto:info@expert.kg">info@expert.kg</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- Текст отсюда УБРАН -->
+                </div>
+
+                <!-- Правая колонка: Карта с заголовком -->
+                <div class="map-wrapper">
+                    <h3>Мы на карте</h3>
+                    <div class="map-container">
+                        <!-- 
+                             2ГИС ВИДЖЕТ
+                        -->
+                        <a class="dg-widget-link" href="http://2gis.kg/bishkek/firm/70000001019336930/center/74.62744474411012,42.85647801011538/zoom/16?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=bigMap">Посмотреть на карте Бишкека</a>
+                        <div class="dg-widget-link"><a href="http://2gis.kg/bishkek/firm/70000001019336930/photos/70000001019336930/center/74.62744474411012,42.85647801011538/zoom/17?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=photos">Фотографии компании</a></div>
+                        <div class="dg-widget-link"><a href="http://2gis.kg/bishkek/center/74.627447,42.855912/zoom/16/routeTab/rsType/bus/to/74.627447,42.855912╎Экспертъ, негосударственная судебно-экспертная организация?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=route">Найти проезд до Экспертъ, негосударственная судебно-экспертная организация</a></div>
+                        <script charset="utf-8" src="https://widgets.2gis.com/js/DGWidgetLoader.js"></script>
+                        <script charset="utf-8">
+                            new DGWidgetLoader({
+                                "width": "100%",
+                                "height": "100%",
+                                "borderColor": "#a3a3a3",
+                                "pos": {
+                                    "lat": 42.85647801011538,
+                                    "lon": 74.62744474411012,
+                                    "zoom": 16
+                                },
+                                "opt": {
+                                    "city": "bishkek"
+                                },
+                                "org": [{
+                                    "id": "70000001019336930"
+                                }]
+                            });
+                        </script>
+                        <noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript. Включите его в настройках вашего браузера.</noscript>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Текст перенесен СЮДА (под контакты и карту) -->
+            <p class="contact-intro">
+                <b>Звоните или ждем вас в нашем офисе для получения профессиональной консультации. <br> Также вы можете отправить описание ситуации на электронную почту, и мы оперативно предоставим необходимые рекомендации.</b>
+            </p>
+
+        </div>
+    </section>
+
+    <!-- ФУТЕР (Общий для всех страниц) -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>ОсОО "Экспертъ"</h4>
+                    <p style="max-width: 250px;">
+                        Независимая экспертиза и оценка. Лицензия №000000.
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h4>Меню</h4>
+                    <ul>
+                        <li><a href="#about" onclick="routeTo('about')">О нас</a></li>
+                        <li><a href="#services" onclick="routeTo('services')">Услуги</a></li>
+                        <li><a href="#tariffs" onclick="routeTo('tariffs')">Тарифы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> г. Бишкек, ул. Горького 20</li>
+                        <li><i class="far fa-clock"></i> ПН-СБ: 09:00 - 17:00</li>
+                        <li><a href="tel:+996555000000"><i class="fas fa-phone-alt"></i> +996 (555) 00-00-00</a></li>
+                        <li><a href="https://wa.me/996555000000"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 ОсОО "Экспертъ". Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT ДЛЯ ПЕРЕКЛЮЧЕНИЯ СТРАНИЦ -->
+    <script>
+        // Функция роутинга (переключения страниц)
+        function router() {
+            // Получаем hash из URL (например #services), если нет - то 'about'
+            const hash = window.location.hash.slice(1) || 'about';
+            
+            // Скрываем все секции
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active-page');
+            });
+            
+            // Убираем активный класс у всех ссылок
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active-link');
+            });
+
+            // Находим нужную секцию и показываем её
+            const targetSection = document.getElementById(hash);
+            if (targetSection) {
+                targetSection.classList.add('active-page');
+                // Прокручиваем вверх при смене страницы
+                window.scrollTo(0, 0);
+            }
+
+            // Подсвечиваем активную ссылку в меню
+            const activeLink = document.querySelector(`.nav-links a[data-page="${hash}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active-link');
+            }
+
+            // Закрываем мобильное меню если открыто
+            document.getElementById('navLinks').classList.remove('active');
+        }
+
+        // Слушаем изменения в адресной строке
+        window.addEventListener('hashchange', router);
+        
+        // Запускаем роутер при первой загрузке
+        window.addEventListener('load', router);
+
+        // Функция для мобильного меню
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+
+        // Вспомогательная функция для футера
+        function routeTo(pageId) {
+            window.location.hash = pageId;
+        }
+    </script>
+</body>
+</html>
