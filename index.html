@@ -256,6 +256,12 @@
         }
 
         /* --- ТАРИФЫ --- */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 10px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -265,26 +271,61 @@
         }
 
         th, td {
-            padding: 18px 25px;
+            padding: 12px 15px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border: 1px solid #ddd;
+            font-size: 0.9rem;
         }
 
         th {
             background-color: var(--primary-color);
             color: white;
             font-weight: 600;
+            vertical-align: middle;
         }
 
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-        
+
         .price-cell {
             font-weight: bold;
-            color: var(--accent-color);
-            width: 200px;
+            color: #2c3e50;
             white-space: nowrap;
+            text-align: center;
+        }
+
+        .tariff-subtitle {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin: 40px 0 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .tariff-note {
+            margin-top: 10px;
+            font-size: 0.88rem;
+            color: #555;
+            font-style: italic;
+        }
+
+
+        .table-section-header th {
+            background-color: #3d5166;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .table-compact th,
+        .table-compact td {
+            padding: 8px 10px;
+            font-size: 0.78rem;
+        }
+
+        .table-compact th small,
+        .table-compact td small {
+            font-size: 0.72rem;
         }
 
         /* --- ИНФОРМАЦИЯ (FAQ) --- */
@@ -536,13 +577,14 @@
         <div class="container">
             <div class="about-wrapper">
                 <div class="about-hero">
-                    <h1>Профессиональная автоэкспертиза</h1>
-                    <p>Точность. Независимость. Законность.</p>
+                    <h1>Экспертиза дорожно-транспортных происшествий</h1>
                 </div>
-                <h2>О компании</h2>
+                <!-- <h2>О компании</h2> -->
                 <div class="about-content">
                     <p>
-                        <strong>ОсОО "Экспертъ"</strong> — лидер рынка независимой экспертизы в Бишкеке. Мы предоставляем услуги по определению реального ущерба после ДТП и рыночной стоимости автомобилей. Наш приоритет — объективность и техническая грамотность.
+                        <strong>Общество с ограниченной ответственностью "Негосударственная судебно-экспертная организация Экспертъ"</strong> — лидер рынка независимой экспертизы в Кыргызстане. </p>
+                    <p>
+                        Мы проводим услуги по определению реального ущерба после ДТП и рыночной стоимости автомобилей. Наш приоритет — объективность и техническая грамотность.
                     </p>
                     <p>
                         Мы понимаем специфику местного рынка, поэтому при расчетах стоимости ремонта опираемся на <strong>реальные рыночные цены</strong> запчастей и услуг СТО в нашем регионе, а не на усредненные базы данных зарубежных программ. Это позволяет получить честную калькуляцию, которой хватит на фактическое восстановление автомобиля.
@@ -629,43 +671,131 @@
     <section id="tariffs">
         <div class="container">
             <h2>Стоимость услуг</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Наименование услуги</th>
-                        <th>Стоимость</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Экспресс-оценка ущерба (без скрытых дефектов)</td>
-                        <td class="price-cell">от 1 500 сом</td>
-                    </tr>
-                    <tr>
-                        <td>Полная оценка ущерба с отчетом</td>
-                        <td class="price-cell">от 3 000 сом</td>
-                    </tr>
-                    <tr>
-                        <td>Оценка рыночной стоимости автомобиля</td>
-                        <td class="price-cell">2 500 сом</td>
-                    </tr>
-                    <tr>
-                        <td>Трасологическая экспертиза</td>
-                        <td class="price-cell">от 5 000 сом</td>
-                    </tr>
-                    <tr>
-                        <td>Пересчет калькуляции страховой компании</td>
-                        <td class="price-cell">2 000 сом</td>
-                    </tr>
-                    <tr>
-                        <td>Выезд эксперта по городу</td>
-                        <td class="price-cell">1 000 сом</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">
-                * Окончательная стоимость зависит от количества поврежденных деталей и сложности работы.
-            </p>
+
+            <!-- ТАБЛИЦА 1: Исследования восстановительного ущерба -->
+            <h3 class="tariff-subtitle">Исследование восстановительного ущерба</h3>
+            <div class="table-responsive">
+                <table class="table-compact">
+                    <thead>
+                        <tr>
+                            <th style="width:18%;">Вид исследования</th>
+                            <th style="width:12%;">Транспортные средства движимые мускульной силой<br><small>(велосипеды, самокаты)</small></th>
+                            <th style="width:17%;">Мототранспорт с ДВС и электротягой<br><small>(мотоциклы, мопеды, квадроциклы и т.д.)</small></th>
+                            <th style="width:18%;">Легковые авто, автобусы и грузовые малого класса<br><small>(до 3,5 т)</small></th>
+                            <th style="width:18%;">Автобусы и грузовые авто<br><small>(более 3,5 т)</small></th>
+                            <th style="width:17%;">Спец. техника<br><small>(тракторы, комбайны, краны, автовышки)</small></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Простые исследования</strong><br><small>до 3-х деталей</small></td>
+                            <td class="price-cell">Договорная</td>
+                            <td class="price-cell">3 000 сом</td>
+                            <td class="price-cell">3 000 сом</td>
+                            <td class="price-cell">3 000 – 5 000 сом<br><small>(от класса ТС и года выпуска)</small></td>
+                            <td class="price-cell">Договорная</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Исследования средней сложности</strong><br><small>от 3-х до 20-и деталей</small></td>
+                            <td class="price-cell">Договорная</td>
+                            <td class="price-cell">по 300 сом<br><small>за деталь</small></td>
+                            <td class="price-cell">по 300 сом<br><small>за деталь</small></td>
+                            <td class="price-cell">по 300 – 500 сом<br><small>за деталь (от класса ТС и года выпуска)</small></td>
+                            <td class="price-cell">Договорная</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Сложные исследования</strong><br><small>от 20-и деталей и выше</small></td>
+                            <td class="price-cell">Договорная</td>
+                            <td class="price-cell">по 150 сом<br><small>за деталь</small></td>
+                            <td class="price-cell">по 150 сом<br><small>за деталь</small></td>
+                            <td class="price-cell">по 150 – 300 сом<br><small>за деталь (от класса ТС и года выпуска)</small></td>
+                            <td class="price-cell">Договорная</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Отчет о нецелесообразности восстановления ТС</strong></td>
+                            <td class="price-cell">Договорная</td>
+                            <td class="price-cell">6 000 – 15 000 сом<br><small>от класса ТС и года выпуска</small></td>
+                            <td class="price-cell">10 000 – 20 000 сом<br><small>от класса ТС и года выпуска</small></td>
+                            <td class="price-cell">10 000 – 30 000 сом<br><small>от класса ТС и года выпуска</small></td>
+                            <td class="price-cell">Договорная</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Утеря товарной стоимости</strong></td>
+                            <td class="price-cell">—</td>
+                            <td class="price-cell">1 000 – 3 000 сом<br><small>от степени повреждения</small></td>
+                            <td class="price-cell">1 000 – 3 000 сом<br><small>от степени повреждения</small></td>
+                            <td class="price-cell">1 000 – 3 000 сом<br><small>от степени повреждения</small></td>
+                            <td class="price-cell">Договорная</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Оценка стоимости ТС</strong></td>
+                            <td class="price-cell">—</td>
+                            <td class="price-cell">7 000 сом</td>
+                            <td class="price-cell">7 000 сом</td>
+                            <td class="price-cell">7 000 – 10 000 сом</td>
+                            <td class="price-cell">—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="tariff-note">* Окончательная стоимость зависит от количества поврежденных деталей и сложности работы.</p>
+
+            <!-- ТАБЛИЦА 2: Автотехническое исследование -->
+            <h3 class="tariff-subtitle">Автотехническое исследование (техническое состояние ТС)</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="min-width:180px;">Вид исследования</th>
+                            <th style="min-width:120px;">Транспортные средства движимые мускульной силой</th>
+                            <th style="min-width:130px;">Мототранспорт с ДВС и электротягой</th>
+                            <th style="min-width:160px;">Легковые авто, автобусы и грузовые авто<br><small>до 3,5 т и муниципальный транспорт</small></th>
+                            <th style="min-width:150px;">Коммерческие автобусы и грузовые авто<br><small>более 3,5 т</small></th>
+                            <th style="min-width:160px;">Грузовые авто с прицепами, седельные тягачи с полуприцепами, автопоезд</th>
+                            <th style="min-width:130px;">Спец. техника<br><small>(тракторы, комбайны, краны)</small></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Исследование технического состояния ТС</strong></td>
+                            <td class="price-cell">500 сом</td>
+                            <td class="price-cell">1 000 сом</td>
+                            <td class="price-cell">1 500 сом</td>
+                            <td class="price-cell">2 000 сом</td>
+                            <td class="price-cell">2 500 сом</td>
+                            <td class="price-cell">Договорная</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+             <p class="tariff-note">* Выезд эксперта для осмотра ТС, находящегося за территорией города Бишкек – оплачивается на договорной основе.</p>
+        
+
+            <!-- ТАБЛИЦА 3: Трасология и обстоятельства ДТП -->
+            <h3 class="tariff-subtitle">Исследование транспортной трасологии и обстоятельств ДТП</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="min-width:220px;">Вид исследования</th>
+                            <th>Транспортные средства движимые мускульной силой, электро-самокаты, мототранспорт с ДВС и электрической тяговой силой</th>
+                            <th>Легковые автомобили, автобусы, грузовые авто (с прицепами и полуприцепами) и спец. техника</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Исследование транспортной трасологии</strong><br>(Механизм ДТП)</td>
+                            <td class="price-cell" colspan="2">1 000 сом</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Исследование обстоятельств ДТП</strong><br>(расчетным методом)</td>
+                            <td class="price-cell" colspan="2">1 000 сом</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="tariff-note">* Исследования технического состояния ТС, транспортной трасологии и обстоятельств ДТП, требующие сложные исследования – производятся на договорной основе.</p>
+
         </div>
     </section>
 
@@ -689,10 +819,6 @@
                 <p>Да, обязательно. Вы должны отправить телеграмму с уведомлением о вручении виновнику (и страховой) за 3 рабочих дня до осмотра. Это сделает наше заключение легитимным доказательством.</p>
             </details>
 
-            <details class="faq-item">
-                <summary>Как быстро будет готов отчет?</summary>
-                <p>Осмотр занимает до часа. Подготовка документов, расчетов и фототаблиц обычно занимает 1-2 рабочих дня.</p>
-            </details>
 
             <details class="faq-item">
                 <summary>Какой срок действия у оценки?</summary>
@@ -722,7 +848,8 @@
                             <i class="far fa-clock"></i>
                             <div>
                                 <strong>Режим работы:</strong><br>
-                                ПН-СБ: 09:00 - 17:00<br>
+                                ПН-ПТ: 09:00 - 18:00<br>
+                                СБ: 09:00 - 15:00<br>
                                 <span style="color: var(--accent-color);">ВС: Выходной</span>
                             </div>
                         </li>
@@ -730,21 +857,21 @@
                             <i class="fas fa-phone-volume"></i>
                             <div>
                                 <strong>Телефон:</strong><br>
-                                <a href="tel:+996555000000">+996 (555) 00-00-00</a>
+                                <a href="tel:+996555958726">+996 (555) 95-87-26</a>
                             </div>
                         </li>
                         <li>
                             <i class="fab fa-whatsapp"></i>
                             <div>
                                 <strong>WhatsApp:</strong><br>
-                                <a href="https://wa.me/996555000000" target="_blank">Написать в WhatsApp</a>
+                                <a href="https://wa.me/996555958726" target="_blank">Написать в WhatsApp</a>
                             </div>
                         </li>
                         <li>
                             <i class="far fa-envelope"></i>
                             <div>
                                 <strong>Email:</strong><br>
-                                <a href="mailto:info@expert.kg">info@expert.kg</a>
+                                <a href="mailto:ekspert.kg@mail.ru">ekspert.kg@mail.ru</a>
                             </div>
                         </li>
                     </ul>
@@ -801,7 +928,7 @@
                 <div class="footer-column">
                     <h4>ОсОО "Экспертъ"</h4>
                     <p style="max-width: 250px;">
-                        Независимая экспертиза и оценка. Лицензия №000000.
+                        Независимая экспертиза и оценка. Серия ГПЮ Лицензия №0048288.
                     </p>
                 </div>
                 <div class="footer-column">
@@ -815,15 +942,15 @@
                 <div class="footer-column">
                     <h4>Контакты</h4>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> г. Бишкек, ул. Горького 20</li>
-                        <li><i class="far fa-clock"></i> ПН-СБ: 09:00 - 17:00</li>
-                        <li><a href="tel:+996555000000"><i class="fas fa-phone-alt"></i> +996 (555) 00-00-00</a></li>
-                        <li><a href="https://wa.me/996555000000"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> г. Бишкек, ул. Горького 20, кабинет 8</li>
+                        <li><i class="far fa-clock"></i> ПН-ПТ: 09:00 – 18:00 &nbsp;|&nbsp; СБ: 09:00 – 15:00</li>
+                        <li><a href="tel:+996555958726"><i class="fas fa-phone-alt"></i> +996 (555) 95-87-26</a></li>
+                        <li><a href="https://wa.me/996555958726"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                &copy; 2025 ОсОО "Экспертъ". Все права защищены.
+                &copy; 2026 ОсОО "Экспертъ". Все права защищены.
             </div>
         </div>
     </footer>
